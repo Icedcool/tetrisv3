@@ -18,6 +18,8 @@ body {
   position: relative;
   width: 660px;
   height: 700px;
+  transform-origin: top center;
+  touch-action: manipulation;
 }
 
 #game-canvas {
@@ -29,8 +31,8 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 660px;
+  height: 700px;
   pointer-events: none;
 }
 
@@ -144,4 +146,145 @@ body {
 @keyframes pulse {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.5; }
+}
+
+/* --- Menu Card --- */
+
+.menu-card {
+  background: rgba(8, 8, 40, 0.88);
+  border: 1px solid rgba(80, 80, 180, 0.4);
+  border-radius: 12px;
+  padding: 40px 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 340px;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6);
+}
+
+.menu-card__title {
+  font-size: 56px;
+  font-weight: 800;
+  letter-spacing: 10px;
+  text-transform: uppercase;
+  background: linear-gradient(180deg, #fff 30%, #5bf 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.menu-card__version {
+  font-size: 13px;
+  color: #5bf;
+  letter-spacing: 3px;
+  margin-top: -4px;
+  margin-bottom: 28px;
+}
+
+.menu-card__play {
+  padding: 14px 60px;
+  font-size: 20px;
+}
+
+.menu-card__hint {
+  font-size: 12px;
+  color: #666;
+  margin-top: 8px;
+  margin-bottom: 6px;
+}
+
+.menu-card__divider {
+  width: 100%;
+  height: 1px;
+  background: rgba(80, 80, 180, 0.3);
+  margin: 20px 0;
+}
+
+.menu-card__controls {
+  width: 100%;
+}
+
+.menu-card__controls h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: #5bf;
+  margin-bottom: 10px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.menu-card__controls table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.menu-card__controls td {
+  padding: 3px 0;
+  font-size: 13px;
+  color: #999;
+}
+
+.menu-card__controls td:first-child {
+  color: #ccc;
+  font-weight: 600;
+  width: 100px;
+  text-align: right;
+  padding-right: 14px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* --- Touch Controls --- */
+
+.touch-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 8px 4px;
+  width: 660px;
+}
+
+.touch-controls--hidden {
+  display: none;
+}
+
+.touch-row {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+}
+
+.touch-btn {
+  flex: 1;
+  max-width: 100px;
+  min-height: 48px;
+  background: rgba(30, 30, 80, 0.9);
+  border: 1px solid rgba(80, 80, 180, 0.5);
+  border-radius: 8px;
+  color: #ccc;
+  font-size: 20px;
+  font-family: inherit;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.touch-btn--active {
+  background: rgba(60, 60, 140, 0.9);
+  border-color: #5bf;
+  color: #fff;
+}
+
+/* --- Responsive Scaling for Small Screens --- */
+
+@media (max-width: 680px), (max-height: 750px) {
+  body {
+    align-items: flex-start;
+    padding-top: 4px;
+    overflow: auto;
+  }
 }

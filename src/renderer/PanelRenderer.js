@@ -6,9 +6,10 @@ import {
 } from '../constants.js';
 
 export default class PanelRenderer {
-  constructor(renderer) {
+  constructor(renderer, isTouchDevice = false) {
     this.renderer = renderer;
     this.ctx = renderer.ctx;
+    this._isTouchDevice = isTouchDevice;
   }
 
   draw(state) {
@@ -16,7 +17,9 @@ export default class PanelRenderer {
     this._drawNext(state);
     this._drawScore(state);
     this._drawLevel(state);
-    this._drawControls();
+    if (!this._isTouchDevice) {
+      this._drawControls();
+    }
   }
 
   _drawHold(state) {

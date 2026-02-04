@@ -1,6 +1,7 @@
 import { DT_CAP } from './constants.js';
 import GameEngine from './engine/GameEngine.js';
 import InputManager from './engine/InputManager.js';
+import TouchController from './engine/TouchController.js';
 import Renderer from './renderer/Renderer.js';
 import BoardRenderer from './renderer/BoardRenderer.js';
 import PanelRenderer from './renderer/PanelRenderer.js';
@@ -9,19 +10,44 @@ import MenuRenderer from './renderer/MenuRenderer.js';
 import UIController from './ui/UIController.js';
 import HighScoreManager from './ui/HighScoreManager.js';
 
+// --- Touch detection ---
+const isTouchDevice = 'ontouchstart' in window;
+
 // --- Setup ---
 const canvas = document.getElementById('game-canvas');
 const overlay = document.getElementById('overlay-container');
+const gameContainer = document.getElementById('game-container');
+const touchBar = document.getElementById('touch-controls');
 
 const engine = new GameEngine();
 const input = new InputManager();
 const renderer = new Renderer(canvas);
 const boardRenderer = new BoardRenderer(renderer);
-const panelRenderer = new PanelRenderer(renderer);
+const panelRenderer = new PanelRenderer(renderer, isTouchDevice);
 const animationManager = new AnimationManager();
 const menuRenderer = new MenuRenderer(renderer);
 const highScores = new HighScoreManager();
-const ui = new UIController(overlay, engine, highScores);
+const ui = new UIController(overlay, engine, highScores, isTouchDevice);
+
+// --- Touch controller (mobile only) ---
+let touch = null;
+if (isTouchDevice) {
+  touchBar.classList.remove('touch-controls--hidden');
+  touch = new TouchController();
+  touch.bind(touchBar);
+  touch.on('action', (action) => {
+    switch (action) {
+      case 'left':      engine.moveLeft(); break;
+      case 'right':     engine.moveRight(); break;
+      case 'softDrop':  engine.softDrop(); break;
+      case 'hardDrop':  engine.hardDrop(); break;
+      case 'rotateCW':  engine.rotateCW(); break;
+      case 'rotateCCW': engine.rotateCCW(); break;
+      case 'hold':      engine.holdPiece(); break;
+      case 'pause':     engine.togglePause(); break;
+    }
+  });
+}
 
 // --- Input → Engine ---
 input.on('action', (action) => {
@@ -69,6 +95,29 @@ engine.on('lines-cleared', () => {
   animationManager.clear();
 });
 
+// --- Responsive scaling ---
+const CANVAS_W = 660;
+const CANVAS_H = 700;
+const TOUCH_BAR_H = isTouchDevice ? 110 : 0;
+
+function applyScaling() {
+  const vw = window.innerWidth;
+  const vh = window.innerHeight;
+  const totalH = CANVAS_H + TOUCH_BAR_H;
+  const scale = Math.min(vw / CANVAS_W, vh / totalH, 1);
+
+  if (scale < 1) {
+    gameContainer.style.transform = `scale(${scale})`;
+    gameContainer.style.marginBottom = `${-(totalH - totalH * scale)}px`;
+  } else {
+    gameContainer.style.transform = '';
+    gameContainer.style.marginBottom = '';
+  }
+}
+
+applyScaling();
+window.addEventListener('resize', applyScaling);
+
 // --- Game Loop ---
 let lastTime = 0;
 let menuRafId = null;
@@ -90,6 +139,7 @@ function gameLoop(time) {
   lastTime = time;
 
   input.update(dt);
+  if (touch) touch.update(dt);
   engine.update(dt);
 
   const state = engine.getState();

@@ -1,6 +1,7 @@
 export default class PauseScreen {
-  constructor(container) {
+  constructor(container, isTouchDevice = false) {
     this._container = container;
+    this._isTouchDevice = isTouchDevice;
     this._el = null;
     this._keyHandler = null;
     this.onResume = null;
@@ -16,7 +17,7 @@ export default class PauseScreen {
       <div class="overlay__title">PAUSED</div>
       <button class="overlay__btn" data-action="resume">RESUME</button>
       <button class="overlay__btn" data-action="menu">MAIN MENU</button>
-      <div class="overlay__controls" style="margin-top:20px">Press Esc to resume</div>
+      <div class="overlay__controls" style="margin-top:20px">${this._isTouchDevice ? 'Tap Resume to continue' : 'Press Esc to resume'}</div>
     `;
 
     el.querySelector('[data-action="resume"]').addEventListener('click', () => {

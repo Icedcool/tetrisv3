@@ -3,13 +3,13 @@ import PauseScreen from './screens/PauseScreen.js';
 import GameOverScreen from './screens/GameOverScreen.js';
 
 export default class UIController {
-  constructor(container, engine, highScores) {
+  constructor(container, engine, highScores, isTouchDevice = false) {
     this._container = container;
     this._engine = engine;
     this._highScores = highScores;
 
-    this.menu = new MenuScreen(container, highScores);
-    this.pause = new PauseScreen(container);
+    this.menu = new MenuScreen(container, highScores, isTouchDevice);
+    this.pause = new PauseScreen(container, isTouchDevice);
     this.gameOver = new GameOverScreen(container, highScores);
 
     // Callbacks set by main.js

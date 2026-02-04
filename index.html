@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Tetris</title>
   <link rel="stylesheet" href="style.css">
 </head>
@@ -10,6 +10,20 @@
   <div id="game-container">
     <canvas id="game-canvas" width="660" height="700"></canvas>
     <div id="overlay-container"></div>
+    <div id="touch-controls" class="touch-controls touch-controls--hidden">
+      <div class="touch-row">
+        <button class="touch-btn" data-touch="btn-left" aria-label="Move Left">&larr;</button>
+        <button class="touch-btn" data-touch="btn-right" aria-label="Move Right">&rarr;</button>
+        <button class="touch-btn" data-touch="btn-softdrop" aria-label="Soft Drop">&darr;</button>
+        <button class="touch-btn" data-touch="btn-harddrop" aria-label="Hard Drop">&dArr;</button>
+      </div>
+      <div class="touch-row">
+        <button class="touch-btn" data-touch="btn-rotatecw" aria-label="Rotate CW">&#8635;</button>
+        <button class="touch-btn" data-touch="btn-rotateccw" aria-label="Rotate CCW">&#8634;</button>
+        <button class="touch-btn" data-touch="btn-hold" aria-label="Hold">Hold</button>
+        <button class="touch-btn" data-touch="btn-pause" aria-label="Pause">&#9208;</button>
+      </div>
+    </div>
   </div>
   <script type="module" src="/src/main.js"></script>
 </body>
