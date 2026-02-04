@@ -7,9 +7,17 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div id="game-container">
-    <canvas id="game-canvas" width="660" height="700"></canvas>
-    <div id="overlay-container"></div>
+  <div id="device-shell">
+    <div class="shell-header">
+      <span class="shell-led"></span>
+      <span class="shell-brand">TETRIS</span>
+    </div>
+    <div class="shell-screen">
+      <div id="game-container">
+        <canvas id="game-canvas" width="660" height="700"></canvas>
+        <div id="overlay-container"></div>
+      </div>
+    </div>
     <div id="touch-controls" class="gb-controls gb-controls--hidden">
       <div class="gb-main">
         <div class="gb-dpad">
@@ -29,6 +37,7 @@
         <button class="gb-meta__btn" data-touch="btn-pause" aria-label="Pause">START</button>
       </div>
     </div>
+    <div class="shell-footer"></div>
   </div>
   <script type="module" src="/src/main.js"></script>
 </body>

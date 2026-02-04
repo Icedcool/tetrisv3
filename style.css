@@ -5,7 +5,7 @@
 }
 
 body {
-  background: #0a0a2e;
+  background: #060618;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -14,12 +14,64 @@ body {
   overflow: hidden;
 }
 
+/* --- Device Shell --- */
+
+#device-shell {
+  background: linear-gradient(170deg, #1c1c4a 0%, #141436 50%, #101030 100%);
+  border-radius: 22px;
+  padding: 0 18px;
+  box-shadow:
+    0 2px 0 rgba(255, 255, 255, 0.04) inset,
+    0 -1px 0 rgba(0, 0, 0, 0.3) inset,
+    0 6px 40px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(60, 60, 140, 0.25);
+  transform-origin: top center;
+  touch-action: manipulation;
+}
+
+.shell-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 0 12px;
+}
+
+.shell-led {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #4f6, #1a4);
+  box-shadow: 0 0 6px rgba(68, 255, 102, 0.5);
+}
+
+.shell-brand {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 5px;
+  color: rgba(255, 255, 255, 0.15);
+  text-transform: uppercase;
+}
+
+.shell-screen {
+  border-radius: 6px;
+  border: 3px solid #08081e;
+  box-shadow:
+    inset 0 2px 10px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(60, 60, 140, 0.15);
+  overflow: hidden;
+}
+
+.shell-footer {
+  height: 16px;
+}
+
+/* --- Game Container (the "screen") --- */
+
 #game-container {
   position: relative;
   width: 660px;
   height: 700px;
-  transform-origin: top center;
-  touch-action: manipulation;
 }
 
 #game-canvas {
@@ -39,6 +91,8 @@ body {
 #overlay-container > * {
   pointer-events: auto;
 }
+
+/* --- Overlays --- */
 
 .overlay {
   position: absolute;
@@ -239,18 +293,14 @@ body {
 .gb-controls {
   display: flex;
   flex-direction: column;
-  width: 660px;
-  padding: 18px 24px 14px;
+  padding: 18px 6px 0;
   gap: 16px;
-  background: #12123a;
-  border-top: 2px solid rgba(80, 80, 180, 0.3);
 }
 
 .gb-controls--hidden {
   display: none;
 }
 
-/* Main row: D-pad left, A/B right */
 .gb-main {
   display: flex;
   justify-content: space-between;
@@ -448,7 +498,7 @@ body {
 
 /* --- Responsive Scaling for Small Screens --- */
 
-@media (max-width: 680px), (max-height: 750px) {
+@media (max-width: 720px), (max-height: 800px) {
   body {
     align-items: flex-start;
     padding-top: 4px;

@@ -17,6 +17,7 @@ const isTouchDevice = 'ontouchstart' in window;
 const canvas = document.getElementById('game-canvas');
 const overlay = document.getElementById('overlay-container');
 const gameContainer = document.getElementById('game-container');
+const deviceShell = document.getElementById('device-shell');
 const touchBar = document.getElementById('touch-controls');
 
 const engine = new GameEngine();
@@ -96,22 +97,24 @@ engine.on('lines-cleared', () => {
 });
 
 // --- Responsive scaling ---
-const CANVAS_W = 660;
-const CANVAS_H = 700;
+// Shell adds: 36px side padding (18×2), 6px screen border (3×2),
+// ~42px header, ~16px footer, ~210px touch bar when present
+const SHELL_W = 660 + 42;  // canvas + side padding + screen border
+const SHELL_H_BASE = 700 + 58; // canvas + header + footer + screen border
 const TOUCH_BAR_H = isTouchDevice ? 210 : 0;
 
 function applyScaling() {
   const vw = window.innerWidth;
   const vh = window.innerHeight;
-  const totalH = CANVAS_H + TOUCH_BAR_H;
-  const scale = Math.min(vw / CANVAS_W, vh / totalH, 1);
+  const totalH = SHELL_H_BASE + TOUCH_BAR_H;
+  const scale = Math.min(vw / SHELL_W, vh / totalH, 1);
 
   if (scale < 1) {
-    gameContainer.style.transform = `scale(${scale})`;
-    gameContainer.style.marginBottom = `${-(totalH - totalH * scale)}px`;
+    deviceShell.style.transform = `scale(${scale})`;
+    deviceShell.style.marginBottom = `${-(totalH - totalH * scale)}px`;
   } else {
-    gameContainer.style.transform = '';
-    gameContainer.style.marginBottom = '';
+    deviceShell.style.transform = '';
+    deviceShell.style.marginBottom = '';
   }
 }
 
