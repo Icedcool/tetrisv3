@@ -315,6 +315,17 @@ body {
   grid-template-rows: 52px 52px 52px;
   gap: 0;
   position: relative;
+  z-index: 0;
+}
+
+.gb-dpad::before {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  background: #111132;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.4);
+  z-index: -1;
 }
 
 .gb-dpad__btn {
@@ -423,6 +434,34 @@ body {
 
 .gb-dpad__down.touch-btn--active::after {
   border-top-color: #5bf;
+}
+
+/* --- Hold Button --- */
+.gb-hold {
+  background: #1e1e50;
+  border: 2px solid rgba(80, 80, 180, 0.4);
+  border-radius: 10px;
+  color: #8888bb;
+  font-size: 11px;
+  font-weight: 700;
+  font-family: inherit;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 14px 16px;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  box-shadow: 0 3px 0 #0e0e2a;
+  align-self: center;
+}
+
+.gb-hold.touch-btn--active {
+  background: #2e2e70;
+  border-color: #5bf;
+  color: #fff;
+  box-shadow: 0 1px 0 #0e0e2a;
+  transform: translateY(2px);
 }
 
 /* --- A / B Buttons --- */
