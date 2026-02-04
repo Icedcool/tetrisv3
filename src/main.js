@@ -32,7 +32,7 @@ const ui = new UIController(overlay, engine, highScores, isTouchDevice);
 // --- Touch controller (mobile only) ---
 let touch = null;
 if (isTouchDevice) {
-  touchBar.classList.remove('touch-controls--hidden');
+  touchBar.classList.remove('gb-controls--hidden');
   touch = new TouchController();
   touch.bind(touchBar);
   touch.on('action', (action) => {
@@ -98,7 +98,7 @@ engine.on('lines-cleared', () => {
 // --- Responsive scaling ---
 const CANVAS_W = 660;
 const CANVAS_H = 700;
-const TOUCH_BAR_H = isTouchDevice ? 110 : 0;
+const TOUCH_BAR_H = isTouchDevice ? 210 : 0;
 
 function applyScaling() {
   const vw = window.innerWidth;

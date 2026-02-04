@@ -234,35 +234,165 @@ body {
   font-variant-numeric: tabular-nums;
 }
 
-/* --- Touch Controls --- */
+/* --- Game Boy Touch Controls --- */
 
-.touch-controls {
+.gb-controls {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  padding: 8px 4px;
   width: 660px;
+  padding: 18px 24px 14px;
+  gap: 16px;
+  background: #12123a;
+  border-top: 2px solid rgba(80, 80, 180, 0.3);
 }
 
-.touch-controls--hidden {
+.gb-controls--hidden {
   display: none;
 }
 
-.touch-row {
+/* Main row: D-pad left, A/B right */
+.gb-main {
   display: flex;
-  gap: 6px;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
 }
 
-.touch-btn {
-  flex: 1;
-  max-width: 100px;
-  min-height: 48px;
-  background: rgba(30, 30, 80, 0.9);
-  border: 1px solid rgba(80, 80, 180, 0.5);
-  border-radius: 8px;
-  color: #ccc;
-  font-size: 20px;
+/* --- D-Pad --- */
+.gb-dpad {
+  display: grid;
+  grid-template-columns: 52px 52px 52px;
+  grid-template-rows: 52px 52px 52px;
+  gap: 0;
+  position: relative;
+}
+
+.gb-dpad__btn {
+  background: #1e1e50;
+  border: none;
+  color: #8888bb;
+  font-size: 18px;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  position: relative;
+}
+
+.gb-dpad__btn::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+
+.gb-dpad__center {
+  background: #1e1e50;
+  border: none;
+}
+
+.gb-dpad__up {
+  grid-column: 2;
+  grid-row: 1;
+  border-radius: 4px 4px 0 0;
+}
+
+.gb-dpad__up::after {
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-bottom: 9px solid #8888bb;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.gb-dpad__left {
+  grid-column: 1;
+  grid-row: 2;
+  border-radius: 4px 0 0 4px;
+}
+
+.gb-dpad__left::after {
+  border-top: 7px solid transparent;
+  border-bottom: 7px solid transparent;
+  border-right: 9px solid #8888bb;
+  top: 50%;
+  left: 14px;
+  transform: translateY(-50%);
+}
+
+.gb-dpad__right {
+  grid-column: 3;
+  grid-row: 2;
+  border-radius: 0 4px 4px 0;
+}
+
+.gb-dpad__right::after {
+  border-top: 7px solid transparent;
+  border-bottom: 7px solid transparent;
+  border-left: 9px solid #8888bb;
+  top: 50%;
+  right: 14px;
+  transform: translateY(-50%);
+}
+
+.gb-dpad__down {
+  grid-column: 2;
+  grid-row: 3;
+  border-radius: 0 0 4px 4px;
+}
+
+.gb-dpad__down::after {
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-top: 9px solid #8888bb;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.gb-dpad__btn.touch-btn--active {
+  background: #2e2e70;
+}
+
+.gb-dpad__btn.touch-btn--active::after {
+  border-color: transparent;
+}
+
+.gb-dpad__up.touch-btn--active::after {
+  border-bottom-color: #5bf;
+}
+
+.gb-dpad__left.touch-btn--active::after {
+  border-right-color: #5bf;
+}
+
+.gb-dpad__right.touch-btn--active::after {
+  border-left-color: #5bf;
+}
+
+.gb-dpad__down.touch-btn--active::after {
+  border-top-color: #5bf;
+}
+
+/* --- A / B Buttons --- */
+.gb-ab {
+  display: flex;
+  gap: 16px;
+  align-items: flex-end;
+  transform: rotate(-20deg);
+  margin-right: 10px;
+}
+
+.gb-ab__btn {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 2px solid rgba(80, 80, 180, 0.5);
+  background: #28205a;
+  color: #8888bb;
+  font-size: 18px;
+  font-weight: 700;
   font-family: inherit;
   cursor: pointer;
   user-select: none;
@@ -271,12 +401,49 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 3px 0 #0e0e2a;
 }
 
-.touch-btn--active {
-  background: rgba(60, 60, 140, 0.9);
+.gb-ab__a {
+  margin-bottom: 14px;
+}
+
+.gb-ab__btn.touch-btn--active {
+  background: #3a3080;
   border-color: #5bf;
   color: #fff;
+  box-shadow: 0 1px 0 #0e0e2a;
+  transform: translateY(2px);
+}
+
+/* --- Select / Start --- */
+.gb-meta {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+}
+
+.gb-meta__btn {
+  background: #1a1a48;
+  border: 1px solid rgba(80, 80, 180, 0.3);
+  border-radius: 12px;
+  color: #666;
+  font-size: 10px;
+  font-weight: 600;
+  font-family: inherit;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 6px 18px;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.gb-meta__btn.touch-btn--active {
+  background: #2a2a60;
+  border-color: #5bf;
+  color: #aaa;
 }
 
 /* --- Responsive Scaling for Small Screens --- */

@@ -10,18 +10,23 @@
   <div id="game-container">
     <canvas id="game-canvas" width="660" height="700"></canvas>
     <div id="overlay-container"></div>
-    <div id="touch-controls" class="touch-controls touch-controls--hidden">
-      <div class="touch-row">
-        <button class="touch-btn" data-touch="btn-left" aria-label="Move Left">&larr;</button>
-        <button class="touch-btn" data-touch="btn-right" aria-label="Move Right">&rarr;</button>
-        <button class="touch-btn" data-touch="btn-softdrop" aria-label="Soft Drop">&darr;</button>
-        <button class="touch-btn" data-touch="btn-harddrop" aria-label="Hard Drop">&dArr;</button>
+    <div id="touch-controls" class="gb-controls gb-controls--hidden">
+      <div class="gb-main">
+        <div class="gb-dpad">
+          <button class="gb-dpad__btn gb-dpad__up" data-touch="btn-harddrop" aria-label="Hard Drop"></button>
+          <button class="gb-dpad__btn gb-dpad__left" data-touch="btn-left" aria-label="Move Left"></button>
+          <div class="gb-dpad__center"></div>
+          <button class="gb-dpad__btn gb-dpad__right" data-touch="btn-right" aria-label="Move Right"></button>
+          <button class="gb-dpad__btn gb-dpad__down" data-touch="btn-softdrop" aria-label="Soft Drop"></button>
+        </div>
+        <div class="gb-ab">
+          <button class="gb-ab__btn gb-ab__b" data-touch="btn-rotateccw" aria-label="Rotate CCW">B</button>
+          <button class="gb-ab__btn gb-ab__a" data-touch="btn-rotatecw" aria-label="Rotate CW">A</button>
+        </div>
       </div>
-      <div class="touch-row">
-        <button class="touch-btn" data-touch="btn-rotatecw" aria-label="Rotate CW">&#8635;</button>
-        <button class="touch-btn" data-touch="btn-rotateccw" aria-label="Rotate CCW">&#8634;</button>
-        <button class="touch-btn" data-touch="btn-hold" aria-label="Hold">Hold</button>
-        <button class="touch-btn" data-touch="btn-pause" aria-label="Pause">&#9208;</button>
+      <div class="gb-meta">
+        <button class="gb-meta__btn" data-touch="btn-hold" aria-label="Hold">SELECT</button>
+        <button class="gb-meta__btn" data-touch="btn-pause" aria-label="Pause">START</button>
       </div>
     </div>
   </div>
